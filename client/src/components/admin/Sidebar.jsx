@@ -141,7 +141,7 @@ const Sidebar = ({ isOpen, setIsOpen, toggleSidebar }) => {
 		<div
 			className={`${
 				isOpen ? "w-64 p-5" : "w-0 p-0"
-			} bg-gray-800 h-screen overflow-y-scroll transition-all duration-300 fixed md:relative z-10`}
+			} bg-gray-800 h-screen overflow-y-scroll transition-all duration-300 fixed md:relative z-50`}
 		>
 			<div className="flex items-center justify-between p-4">
 				<h1
@@ -166,72 +166,54 @@ const Sidebar = ({ isOpen, setIsOpen, toggleSidebar }) => {
 					</h2>
 					<ul
 						className={`mt-2 ${
-							item.pages[0].label
-								? "block"
-								: "flex"
+							item.pages[0].label ? "block" : "flex"
 						}`}
 					>
-						{item.pages.map(
-							(page, index) => {
-								const isActive =
-									location.pathname ===
-									page.url;
-								return (
-									<li
-										key={
-											index
-										}
-										className={`flex items-center p-2 transition font-semibold cursor-pointer hover:text-blue-500 ${
-											isActive
-												? "text-blue-400"
-												: "text-white"
-										}`}
-									>
-										{page.label ? (
-											<a
-												href={
-													page.url
-												}
-												className="flex items-center w-full"
+						{item.pages.map((page, index) => {
+							const isActive = location.pathname === page.url;
+							return (
+								<li
+									key={index}
+									className={`flex items-center p-2 transition font-semibold cursor-pointer hover:text-blue-500 ${
+										isActive
+											? "text-blue-400"
+											: "text-white"
+									}`}
+								>
+									{page.label ? (
+										<a
+											href={page.url}
+											className="flex items-center w-full"
+										>
+											<page.icon className="text-xl" />
+											<span
+												className={`${
+													isOpen ? "ml-4" : "hidden"
+												} md:block`}
 											>
-												<page.icon className="text-xl" />
-												<span
-													className={`${
-														isOpen
-															? "ml-4"
-															: "hidden"
-													} md:block`}
-												>
-													{
-														page.label
-													}
-												</span>
-											</a>
-										) : (
-											<a
-												href={
-													page.url
-												}
-												target="_blank"
-												rel="noopener noreferrer"
-												className="inline"
-											>
-												<page.icon className="text-xl" />
-											</a>
-										)}
-									</li>
-								);
-							}
-						)}
+												{page.label}
+											</span>
+										</a>
+									) : (
+										<a
+											href={page.url}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="inline"
+										>
+											<page.icon className="text-xl" />
+										</a>
+									)}
+								</li>
+							);
+						})}
 					</ul>
 				</div>
 			))}
 
 			<button className="mt-4 flex items-center p-2 text-red-500 hover:text-red-400 transition font-semibold">
 				<FaSignOutAlt className="text-xl" />
-				<span className="text-sm px-2 uppercase font-bold">
-					Logout
-				</span>
+				<span className="text-sm px-2 uppercase font-bold">Logout</span>
 			</button>
 		</div>
 	);

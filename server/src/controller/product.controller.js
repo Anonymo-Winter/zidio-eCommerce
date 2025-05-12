@@ -194,12 +194,16 @@ const getProductById = AsyncHandler(async (req, res) => {
   const { productId } = req.params;
 
   const product = await Product.aggregate([
-    { $match: { _id: productId } },
+    {
+      $match: {
+        _id: productId,
+      },
+    },
     {
       $lookup: {
         from: "reviews",
         localField: "_id",
-        foreignField: "product",
+        foreignField: "product_id",
         as: "reviews",
       },
     },
@@ -212,7 +216,7 @@ const getProductById = AsyncHandler(async (req, res) => {
     {
       $lookup: {
         from: "users",
-        localField: "reviews.reviewer",
+        localField: "reviews.userId",
         foreignField: "_id",
         as: "reviews.reviewerDetails",
       },
