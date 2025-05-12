@@ -1,0 +1,18 @@
+{
+    "files": [],
+    "references": [
+        {
+            "path": "./tsconfig.app.json"
+        }
+    ],
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "module": "esnext", // ✅ required for `allowImportingTsExtensions`
+        "noEmit": true,
+        "allowImportingTsExtensions": true, // ✅ allows `.tsx` in import paths
+        "jsx": "react-jsx" // ✅ for React 17+ JSX transform
+    }
+}
