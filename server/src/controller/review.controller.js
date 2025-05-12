@@ -5,13 +5,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { AsyncHandler } from "../utils/asyncHandler.js";
 import { Review } from "../models/review.model.js";
-/**
- * give a product review with rating and review text
- * edit a product review
- * delete a product review
- * get all reviews of a product
- * delete a product review in the admin panel
- */
+
 
 const createReview = AsyncHandler(async (req, res) => {
   const { rating, reviewText, product_id } = req.body;

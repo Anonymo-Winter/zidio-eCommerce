@@ -8,6 +8,7 @@ import FeaturedProducts from "./components/hero/FeaturedProducts";
 import Sidebar from "./components/admin/Sidebar";
 import { RiMenuFold2Fill } from "react-icons/ri";
 import ProductPage from "./components/productPage";
+import AdminTopbar from "./components/admin/Topbar";
 
 function App() {
     // const authToken = localStorage.getItem("authToken");
@@ -66,6 +67,53 @@ function App() {
             </div>
         </BrowserRouter>
     );
+	const toggleSidebar = () => {
+		setIsOpen(!isOpen);
+	};
+	return (
+		<BrowserRouter>
+			<div className="bg-gray-900 min-h-screen">
+				{isAdmin && authToken ? (
+					<div className="flex bg-gray-900 text-white">
+						<Sidebar
+							isOpen={isOpen}
+							setIsOpen={setIsOpen}
+							toggleSidebar={toggleSidebar}
+						/>
+
+						{/* Main Content */}
+						<div className="flex-1 p-4  md:ml-0">
+							<AdminTopbar toggleSidebar={toggleSidebar} />
+							<Routes>
+// 								<Route path="/admin" element={<Sidebar />} />
+//               <Route path="/admin/dashboard" element={<Sidebar />} />
+//               <Route path="/admin/users" element={<Sidebar />} />
+                <Route path="/admin/products" element={<Sidebar />} />
+//               <Route path="/admin/analytics" element={<Sidebar />} />
+//               <Route path="/admin/logout" element={<Sidebar />} />
+							</Routes>
+						</div>
+					</div>
+				) : (
+					<>
+						<Navbar />
+						<Routes>
+							<Route
+								path="/"
+								element={
+									<>
+										<HeroSection />
+										<CategoryLinks />
+										<FeaturedProducts />
+									</>
+								}
+							/>
+						</Routes>
+					</>
+				)}
+			</div>
+		</BrowserRouter>
+	);
 }
 
 export default App;
